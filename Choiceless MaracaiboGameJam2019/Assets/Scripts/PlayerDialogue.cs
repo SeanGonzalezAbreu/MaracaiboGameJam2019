@@ -1,14 +1,11 @@
 ﻿using UnityEngine;
+using Choiceless.Scripts.Dialogues;
 
 namespace Choiceless.Scripts.Player
 {
-    [RequireComponent(typeof(Rigidbody2D))]
-    public class Player : MonoBehaviour
+    public class PlayerDialogue : MonoBehaviour
     {
         #region Variables
-        [Range(1, 100)]
-        [SerializeField]
-        private float movementSpeed;
 
         #endregion
 
@@ -21,7 +18,10 @@ namespace Choiceless.Scripts.Player
 
         private void Update()
         {
-
+            if (Input.GetButtonDown("Jump"))
+            {
+                DialogueManager.instance.DisplayNextSentence();
+            }
         }
 
         #endregion
