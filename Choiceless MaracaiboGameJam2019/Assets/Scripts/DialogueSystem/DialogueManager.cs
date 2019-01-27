@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 namespace Choiceless.Scripts.Dialogues
 {
@@ -14,6 +16,7 @@ namespace Choiceless.Scripts.Dialogues
         public Animator DialogAnim;
         private Queue<string> sentences;
         public AudioSource audioSource;
+        public Image image;
         #endregion
         #region Unity Callbacks
         private void Start()
@@ -34,15 +37,17 @@ namespace Choiceless.Scripts.Dialogues
             DontDestroyOnLoad(gameObject);
         }
         #endregion
-        public void StartDialog(DialogueData dialogue)
+        public void StartDialog(DialogueTemplate dialogue)
         {
-            Debug.Log("Dialogo Iniciado con " + dialogue.Name);
+            Debug.Log("Dialogo Iniciado con " + dialogue.Data.Name);
             ShowDiagBox(true);
+            GameManager.instance.playerMov.animatorPlayer.SetBool("isMoving", false);
             GameManager.instance.playerMov.enabled = false;
             //GameManager.instance.playerAtk.enabled = false;
-            nameText.text = dialogue.Name;
+            image.sprite = dialogue.Data.Portrait;
+            nameText.text = dialogue.Data.Name;
             sentences.Clear();
-            foreach (string sentence in dialogue.Dialogue)
+            foreach (string sentence in dialogue.Data.Dialogue)
             {
                 sentences.Enqueue(sentence);
             }
@@ -63,14 +68,14 @@ namespace Choiceless.Scripts.Dialogues
             //DialogueText.text = sentence;
             StartCoroutine(TypeSentence(sentence));
         }
-        IEnumerator<string> TypeSentence(string sentence)
+        IEnumerator<WaitForSeconds> TypeSentence(string sentence)
         {
             DialogueText.text = "";
             foreach (char letter in sentence.ToCharArray())
             {
                 DialogueText.text += letter;
                 audioSource.Play();
-                yield return null;
+                yield return new WaitForSeconds(.05f);
             }
         }
         private void EndDialogue()

@@ -6,7 +6,7 @@ namespace Choiceless.Scripts.Dialogues
     public class DialogueTrigger : MonoBehaviour
     {
         #region Variables
-        public DialogueData dialogue;
+        public DialogueTemplate dialogue;
         bool wasShowed = false;
         public bool showOnce = false;
         #endregion

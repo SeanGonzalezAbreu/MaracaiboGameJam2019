@@ -18,7 +18,7 @@ namespace Choiceless.Scripts.Player
 
         private void Update()
         {
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") || Input.GetButtonDown("Fire1") || Input.GetButtonDown("Submit"))
             {
                 DialogueManager.instance.DisplayNextSentence();
             }

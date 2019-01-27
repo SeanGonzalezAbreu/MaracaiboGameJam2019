@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System;
-
+using UnityEngine.UI;
 namespace Choiceless.Scripts.Dialogues
 {
     [Serializable]
@@ -12,6 +12,7 @@ namespace Choiceless.Scripts.Dialogues
         [SerializeField] private string name;
         [TextArea(3, 10)]
         [SerializeField] private string[] dialogue;
+        [SerializeField] private Sprite portrait;
 
 
 
@@ -23,7 +24,10 @@ namespace Choiceless.Scripts.Dialogues
         {
             get { return dialogue; }
         }
-
+        public Sprite Portrait
+        {
+            get { return portrait; }
+        }
         #endregion
     }
 }

@@ -11,7 +11,8 @@ namespace Choiceless.Scripts.Player
         [HideInInspector]
         public Vector2 dirMovement;
         private Rigidbody2D rb;
-        Animator animatorPlayer;
+        [HideInInspector]
+        public Animator animatorPlayer;
         //public MapInfo initialMapInfo;
         //public Rigidbody PlayerRigidbody
         //{
@@ -40,6 +41,15 @@ namespace Choiceless.Scripts.Player
         private void Update()
         {
             dirMovement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+            if (Input.GetButtonDown("Fire1"))
+            {
+                movementSpeed = movementSpeed * 2;
+            }
+            else
+            {
+                movementSpeed = 5;
+            }
+
             if (dirMovement != Vector2.zero)
             {
                 animatorPlayer.SetFloat("MovY", dirMovement.y);
